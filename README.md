@@ -32,7 +32,7 @@ variables = {
 }
 
 query = <<~GRAPHQL
-query listingsinfo($id: ID!){
+query itemsInfo($id: ID!){
   infoForItem(id: $id) 
     {
       id
