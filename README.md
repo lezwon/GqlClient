@@ -27,9 +27,13 @@ headers = {
     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"
 }
 
+variables = {
+  "id": "1234"
+}
+
 query = <<~GRAPHQL
-{
-  infoForItem(id: 1234) 
+query listingsinfo($id: ID!){
+  infoForItem(id: $id) 
     {
       id
       name
@@ -40,14 +44,20 @@ GRAPHQL
 ```
 ### Single Request
 ```
-response = GqlClient.execute(url, query, headers)
+response = GqlClient.execute(url, query, headers, variables)
 ```
 
 ### Session based Request
 
 ```
 session = GqlClient::Session.new(url, headers)
-response = session.execute(query)
+response = session.execute(query, variables)
+```
+
+### Fetch Schema
+```
+session = GqlClient::Session.new(url, headers)
+session.schema
 ```
 
 ## Contributing
